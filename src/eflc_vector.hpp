@@ -69,19 +69,19 @@ namespace solca_comp{
     void Set(const uint64_t kPos, 
 	     const uint64_t kCode);
     uint64_t Get(const uint64_t kPos,
-		 const uint8_t kCodeBits);
+		 const uint8_t kCodeBits) const;
     uint64_t operator[](const uint64_t kPos) const;
     uint64_t NumCodes() const;
-    uint64_t ReservedCodes();
-    uint8_t CodeBits();
+    uint64_t ReservedCodes() const;
+    uint8_t CodeBits() const;
   
     //saving/loading from/to input/output file
     void Save(std::ofstream &ofs);
     void Load(std::ifstream &ifs);
 
     //computation for each space
-    uint64_t NumReservedBlocks();
-    uint64_t NumBlocks();
+    uint64_t NumReservedBlocks() const;
+    uint64_t NumBlocks() const;
     uint64_t ByteSize() const;
 
   };// class EFLCVector

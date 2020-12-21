@@ -21,19 +21,33 @@ COMP =\
 	solca.cpp\
 	compress_main.cpp\
 
+BUILD =\
+	EnumCoder.cpp\
+	RSDic.cpp\
+	eflc_vector.cpp\
+	nrs_dic.cpp\
+	permutation.cpp\
+	out_leaf.cpp\
+	freq_crdict.cpp\
+	succinct_poslp.cpp\
+	solca.cpp\
+	build_main.cpp\
+
 DECOMP =\
 	decomp_suc_poslp.cpp\
 	decompress_main.cpp\
 
 OCOMMON = $(COMMON:%.cpp=%.o)
 OCOMP = $(COMP:%.cpp=%.o)
+OBUILD = $(BUILD:%.cpp=%.o)
 ODECOMP = $(DECOMP:%.cpp=%.o)
 DCOMMON = $(COMMON:%.cpp=%.d)
 DCOMP = $(COMP:%.cpp=%.d)
+DBUILD = $(BUILD:%.cpp=%.d)
 DDECOMP = $(DECOMP:%.cpp=%.d)
 DEPS := $(DCOMMON) $(DCOMP) $(DDECOMP)
 
-all: compress decompress
+all: compress decompress build
 
 -include $(DEPS)
 
@@ -42,6 +56,9 @@ compress:  $(OCOMMON) $(OCOMP)
 
 decompress: $(OCOMMON) $(ODECOMP)
 	$(CXX) $(CXXFLAGS) $(OTHERFLAGS) $(OCOMMON) $(ODECOMP) $(LINKFLAGS) -o decompress
+
+build:  $(OCOMMON) $(OBUILD)
+	$(CXX) $(CXXFLAGS) $(OTHERFLAGS) $(OCOMMON) $(OBUILD) $(LINKFLAGS) -o build
 
 debug:
 	make all CXXFLAGS="-ggdb -W -Wall -pedantic"

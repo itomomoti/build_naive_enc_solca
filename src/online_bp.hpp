@@ -86,69 +86,69 @@ namespace solca_comp
     void Free();
 
     //accessors
-    size_t Length();
+    size_t Length() const;
     size_t Size() const; // in bytes
-    int Alpha();
-    int L();
-    uint32_t Get(uint64_t i);
+    int Alpha() const;
+    int L() const;
+    uint32_t Get(uint64_t i) const;
     uint64_t GetBits(uint64_t i,
-                     uint32_t d);
+                     uint32_t d) const;
 
     //setters
     void Push(const int c);
 
     //rank/select operations
     uint64_t Rank(uint64_t i,
-                  int c);
+                  int c) const;
     uint64_t Select(uint64_t i,
-                    int c);
-    uint64_t OuterRank(uint64_t i);
-    uint64_t OuterSelect(uint64_t i);
+                    int c) const;
+    uint64_t OuterRank(uint64_t i) const;
+    uint64_t OuterSelect(uint64_t i) const;
 
     //back/forword search
     uint64_t Bwd(const uint64_t i,
-                 int32_t d);
+                 int32_t d) const;
     uint64_t Fwd(const uint64_t i,
-                 int32_t d);
+                 int32_t d) const;
 
     //Save and Load
     void Save(std::ofstream &ofs);
     void Load(std::ifstream &ifs);
 
   private:
-    uint32_t Depth(uint64_t i);
+    uint32_t Depth(uint64_t i) const;
     //rank/select operations for middle/mini blocks
-    inline uint64_t FwdSel64(uint64_t x, uint64_t &i);
+    inline uint64_t FwdSel64(uint64_t x, uint64_t &i) const;
     uint64_t FwdSel(uint64_t block_pos,
-                    uint64_t i);
+                    uint64_t i) const;
     uint64_t FwdSel_0(uint64_t block_pos,
-                      uint64_t i);
+                      uint64_t i) const;
     inline uint64_t FwdCnt(uint64_t block_pos,
-                           uint64_t local_pos);
+                           uint64_t local_pos) const;
     inline uint64_t FwdSelOuter64(uint64_t x,
                                   uint64_t y,
-                                  uint64_t &i);
+                                  uint64_t &i) const;
     uint64_t FwdSelOuter(uint64_t block_pos,
-                         uint64_t i);
+                         uint64_t i) const;
     inline uint64_t FwdCntOuter(uint64_t block_pos,
-                                uint64_t i);
+                                uint64_t i) const;
 
     //sub routines of forword serch and back word search
     uint64_t BwdWords(const uint64_t block_pos,
                       const uint32_t end_pos,
                       const uint32_t num_words,
-                      int32_t &d);
+                      int32_t &d) const;
     uint64_t FwdWords(uint64_t block_pos,
                       const uint32_t beg_pos,
                       const uint32_t num_words,
-                      int32_t &d);
+                      int32_t &d) const;
 
   }; //class Onlinebp
 
   // inline implementations
 
   inline uint64_t OnlineBP::FwdSel64(uint64_t x,
-                                     uint64_t &i)
+                                     uint64_t &i) const
   {
 #ifdef __AVX2__
     uint64_t y = CFunc::PopCnt(x);
@@ -172,7 +172,7 @@ namespace solca_comp
   }
 
   inline uint64_t OnlineBP::FwdCnt(uint64_t block_pos,
-                                   uint64_t local_pos)
+                                   uint64_t local_pos) const
   {
     uint64_t ret = 0;
     while (local_pos >= kMidBlock.size)
@@ -186,7 +186,7 @@ namespace solca_comp
 
   inline uint64_t OnlineBP::FwdSelOuter64(uint64_t x,
                                           uint64_t y,
-                                          uint64_t &i)
+                                          uint64_t &i) const
   {
 #ifdef __AVX2__
     const uint64_t a = 0b1101101101101101101101101101101101101101101101101101101101101101;
@@ -227,7 +227,7 @@ namespace solca_comp
   }
 
   inline uint64_t OnlineBP::FwdCntOuter(uint64_t block_pos,
-                                        uint64_t i)
+                                        uint64_t i) const
   {
 #ifdef __AVX2__
     const uint64_t a = 0b1101101101101101101101101101101101101101101101101101101101101101;

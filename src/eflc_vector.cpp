@@ -87,7 +87,7 @@ namespace solca_comp{
   }
 
   uint64_t EFLCVector::Get(const uint64_t kPos,
-			   const uint8_t kCodeBits){
+			   const uint8_t kCodeBits) const {
     return flc_vec_.Get(kPos,
 			kCodeBits);
   }
@@ -101,19 +101,19 @@ namespace solca_comp{
     return num_codes_;
   }
 
-  uint64_t EFLCVector::ReservedCodes(){
+  uint64_t EFLCVector::ReservedCodes() const {
     return reserved_codes_;
   }
 
-  uint8_t EFLCVector::CodeBits(){
+  uint8_t EFLCVector::CodeBits() const {
     return code_bits_;
   }
 
-  uint64_t EFLCVector::NumReservedBlocks(){
+  uint64_t EFLCVector::NumReservedBlocks() const {
     return ((reserved_codes_ * code_bits_)  >> kLgBlockSize) + 1;
   }
 
-  uint64_t EFLCVector::NumBlocks(){
+  uint64_t EFLCVector::NumBlocks() const {
     return ((num_codes_ * code_bits_) >> kLgBlockSize) + 1;
   }
 

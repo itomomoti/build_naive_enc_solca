@@ -50,11 +50,21 @@ namespace solca_comp {
 	     sposlp_(){}
     ~SOLCA(){}
     void Init(const std::string& kOutputFileName);
+
+    //return # of production rules + # of alphabet symbols
+    uint64_t NumRules() const;
+
+    uint64_t Left(const uint64_t kVar) const;
+    uint64_t Right(const uint64_t kVar) const;
     
     uint64_t Compress(const std::string& kInputFileName,
                       const std::string& kOutputFileName,
                       const bool kEraseBr,
                       const bool kPrintLogs);
+    uint64_t Build(const std::string& kInputFileName,
+                   const std::string& kOutputFileName,
+                   const bool kEraseBr,
+                   const bool kPrintLogs);
     uint64_t Decompress(const std::string& kInputFileName,
 			const std::string& kOutputFileName);
 
@@ -81,7 +91,6 @@ namespace solca_comp {
     uint64_t HashSpace() const;
     uint64_t OtherSpace() const;
     uint64_t Space() const;
-    uint64_t NumRules() const;
     uint64_t DictNumRules() const;
     uint64_t WriteSize() const;
     void   PrintColumns() const;

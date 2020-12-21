@@ -50,11 +50,11 @@ namespace solca_comp{
 		       const bool kBit);
     inline void PushBack(const bool kBit);
     //getters
-    inline bool GetBit(const uint64_t kPos);
+    inline bool GetBit(const uint64_t kPos) const;
     inline uint64_t GetBits(const uint64_t kPos,
-			    const uint8_t kNumBits);
-    inline uint64_t GetBlock(const uint64_t kBlockPos);
-    inline bool operator[](const uint64_t kPos);
+			    const uint8_t kNumBits) const;
+    inline uint64_t GetBlock(const uint64_t kBlockPos) const;
+    inline bool operator[](const uint64_t kPos) const;
 
     void Save(std::ofstream &ofs,
 	      const uint64_t kNumBits);
@@ -84,18 +84,18 @@ namespace solca_comp{
     }
   }
 
-  inline bool BitVector::GetBit(const uint64_t kPos)
+  inline bool BitVector::GetBit(const uint64_t kPos) const
   {
     const uint64_t shift = kBlockSize - (kPos & (kBlockSize - 1)) - 1;
     return (bits_[kPos >> kLgBlockSize] >> shift) & 1;
   }
 
-  inline bool BitVector::operator[](const uint64_t kPos){
+  inline bool BitVector::operator[](const uint64_t kPos) const{
     return GetBit(kPos);
   }
 
   inline uint64_t BitVector::GetBits(const uint64_t kPos,
-				     const uint8_t kNumBits)
+				     const uint8_t kNumBits) const
   {
     uint64_t block_pos = kPos >> kLgBlockSize;
     int8_t  shift = kBlockSize - (kPos & (uint64_t)(kBlockSize - 1)) - kNumBits;
@@ -114,7 +114,7 @@ namespace solca_comp{
     }
   }
 
-  inline uint64_t BitVector::GetBlock(const uint64_t kBlockPos){
+  inline uint64_t BitVector::GetBlock(const uint64_t kBlockPos) const {
     return bits_[kBlockPos];
   }
 

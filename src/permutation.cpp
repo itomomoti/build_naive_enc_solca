@@ -54,11 +54,11 @@ namespace solca_comp{
     elems_.Set(kIndex, kVar);
   }
 
-  uint64_t Permutation::GetElem(const uint64_t kIndex){
+  uint64_t Permutation::GetElem(const uint64_t kIndex) const {
     return elems_[kIndex];
   }
 
-  uint64_t Permutation::GetPreElem(const uint64_t kIndex){
+  uint64_t Permutation::GetPreElem(const uint64_t kIndex) const {
     return elems_.Get(kIndex,pre_bpd_);
   }
 
@@ -191,7 +191,7 @@ namespace solca_comp{
     }
   }
 
-  uint64_t Permutation::GetHash(const uint64_t kIndex){
+  uint64_t Permutation::GetHash(const uint64_t kIndex) const {
     uint64_t hash_val = CFunc::ComputeHashVal(hash_size_,kIndex);
     uint64_t key1 = hash_table_[hash_val];
     if(key1 == 0){
@@ -212,11 +212,11 @@ namespace solca_comp{
     }
   }
 
-  uint64_t Permutation::Access(const uint64_t kPos){
+  uint64_t Permutation::Access(const uint64_t kPos) const {
     return elems_[kPos];
   }
 
-  uint64_t Permutation::ReverseAccess(const uint64_t kPos){
+  uint64_t Permutation::ReverseAccess(const uint64_t kPos) const {
 
     uint64_t pos = kPos;
   
@@ -236,7 +236,7 @@ namespace solca_comp{
     return pos;
   }
 
-  uint64_t Permutation::Length(){
+  uint64_t Permutation::Length() const {
     return elems_.NumCodes();
   }
 

@@ -63,14 +63,14 @@ namespace solca_comp{
     //setters and getters
     void SetElem(const uint64_t kIndex, 
 		 const uint64_t kVar);
-    uint64_t GetElem(const uint64_t kIndex);
-    uint64_t GetPreElem(const uint64_t kIndex);
+    uint64_t GetElem(const uint64_t kIndex) const;
+    uint64_t GetPreElem(const uint64_t kIndex) const;
     void SetPreBPD();
   
     void ReIndex();
-    uint64_t Access(const uint64_t kPos);
-    uint64_t ReverseAccess(const uint64_t kPos);
-    uint64_t Length();
+    uint64_t Access(const uint64_t kPos) const;
+    uint64_t ReverseAccess(const uint64_t kPos) const;
+    uint64_t Length() const;
     void Save(std::ofstream &ofs);
     void Load(std::ifstream &ifs);
     uint64_t ByteSize() const;
@@ -79,7 +79,7 @@ namespace solca_comp{
     void InitHash();
     void SetHash(const uint64_t kIndex,
 		 const uint64_t kSkipPos);
-    uint64_t GetHash(const uint64_t kIndex);
+    uint64_t GetHash(const uint64_t kIndex) const;
     void AddTable(const uint64_t kHashVal,
 		  const uint64_t kIndex,
 		  const uint64_t kSkipPos);

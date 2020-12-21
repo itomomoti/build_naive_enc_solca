@@ -107,7 +107,7 @@ namespace solca_comp{
 
 
   uint64_t OutLeaf::ReverseAccess(const uint64_t kVar1,
-				  const uint64_t kVar2){
+				  const uint64_t kVar2) {
   
     return SearchRule(kVar1,kVar2);
 
@@ -311,7 +311,7 @@ namespace solca_comp{
   }
 
   uint64_t OutLeaf::GetPos(const uint64_t kVar,
-			   FLCVector   &result){
+			   FLCVector   &result) const {
     uint64_t hash_val = CFunc::ComputeHashVal(hash_size_, kVar);
     uint64_t key1 = u_hash_table_[hash_val];
     if(key1 == 0){
@@ -669,7 +669,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::Left(const uint64_t kPos){
+  uint64_t OutLeaf::Left(const uint64_t kPos) const {
     if(kPos < prefix_len_){
       uint64_t reverse_index = left_perm_.ReverseAccess(kPos);
       return left_gb_.Select(reverse_index, 1) - reverse_index; 
@@ -685,7 +685,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::Right(const uint64_t kPos){
+  uint64_t OutLeaf::Right(const uint64_t kPos) const {
     if(kPos < prefix_len_){
       uint64_t reverse_index1 = left_perm_.ReverseAccess(kPos); 
       uint64_t reverse_index2 = right_perm_.ReverseAccess(reverse_index1);
@@ -702,7 +702,7 @@ namespace solca_comp{
   }
 
   uint64_t OutLeaf::SearchRule(const uint64_t kVar1,
-			       const uint64_t kVar2){
+			       const uint64_t kVar2) {
   
     if(prefix_len_ > 0){
       uint64_t pre_reverse_access = PreReverseAccess(kVar1, kVar2);
@@ -715,7 +715,7 @@ namespace solca_comp{
   }
 
   uint64_t OutLeaf::PreReverseAccess(const uint64_t kVar1,
-				     const uint64_t kVar2){
+				     const uint64_t kVar2) {
     uint64_t start_index = kDummyCode;
     uint64_t end_index   = kDummyCode;  
     if(kVar1 == 0){
@@ -747,7 +747,7 @@ namespace solca_comp{
   }
 
   uint64_t OutLeaf::SufReverseAccess(const uint64_t kVar1,
-				     const uint64_t kVar2){
+				     const uint64_t kVar2) {
     uint64_t hash_val = CFunc::ComputeHashVal(hash_size_, (kVar1+3)*(kVar2+5));
     uint64_t key1 = hash_table_[hash_val];
     if(key1 == 0){
@@ -787,7 +787,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::LeftRankAll(const uint64_t kVar){
+  uint64_t OutLeaf::LeftRankAll(const uint64_t kVar) const {
   
     if(kVar > left_gb_.zero_num()){
       return 0;
@@ -820,7 +820,7 @@ namespace solca_comp{
 
 
   uint64_t OutLeaf::PreLeftRank(const uint64_t kVar,
-				const uint64_t kPos){
+				const uint64_t kPos) const {
   
     if(kVar > left_gb_.zero_num()){
       return 0;
@@ -892,7 +892,7 @@ namespace solca_comp{
 
 
   uint64_t OutLeaf::PreRightRank(const uint64_t kVar,
-				 const uint64_t kPos){
+				 const uint64_t kPos) const {
   
     if(kVar > right_gb_.zero_num()){
       return 0;
@@ -963,7 +963,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::PreLeftSelect(const uint64_t kVar, const uint64_t kPos){
+  uint64_t OutLeaf::PreLeftSelect(const uint64_t kVar, const uint64_t kPos) const {
     if(kVar == 0){
       if(!left_gb_.GetBit(0)){
 	return kDummyCode;
@@ -996,7 +996,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::PreRightSelect(const uint64_t kVar, const uint64_t kPos){
+  uint64_t OutLeaf::PreRightSelect(const uint64_t kVar, const uint64_t kPos) const {
     if(kVar == 0){
       if(!right_gb_.GetBit(0)){
 	return kDummyCode;
@@ -1029,7 +1029,7 @@ namespace solca_comp{
   }
 
 
-  uint64_t OutLeaf::PreSelectInRightPerm(const uint64_t kVar, const uint64_t kPos){
+  uint64_t OutLeaf::PreSelectInRightPerm(const uint64_t kVar, const uint64_t kPos) const {
 
     if(kVar == 0){
       if(!right_gb_.GetBit(0)){
@@ -1064,13 +1064,13 @@ namespace solca_comp{
   }
 
   uint64_t OutLeaf::SufLeftSelect(const uint64_t kVar,
-				  FLCVector &result){
+				  FLCVector &result) const {
     return suf_left_.Select(kVar,result);
   }
 
 
   uint64_t OutLeaf::SufRightSelect(const uint64_t kVar,
-				   FLCVector &result){
+				   FLCVector &result) const {
     return suf_right_.Select(kVar,result);
   }
 

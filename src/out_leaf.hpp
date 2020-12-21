@@ -91,33 +91,33 @@ namespace solca_comp{
     uint64_t ReverseAccessAndAdd(const uint64_t kVar1,
 				 const uint64_t kVar2); 
     uint64_t ReverseAccess   (const uint64_t kVar1,
-			      const uint64_t kVar2); 
-    uint64_t Left           (const uint64_t kPos);
-    uint64_t Right          (const uint64_t kPos);
+			      const uint64_t kVar2);
+    uint64_t Left           (const uint64_t kPos) const;
+    uint64_t Right          (const uint64_t kPos) const;
     uint64_t PreLeftRank(const uint64_t kVar,
-			 const uint64_t kPos);
-    uint64_t LeftRankAll(const uint64_t kVar);
+			 const uint64_t kPos) const;
+    uint64_t LeftRankAll(const uint64_t kVar) const;
     uint64_t PreRightRank(const uint64_t kVar,
-			  const uint64_t kPos);
+			  const uint64_t kPos) const;
     uint64_t PreLeftSelect(const uint64_t kVar,
-			   const uint64_t kPos);
+			   const uint64_t kPos) const;
     uint64_t PreRightSelect(const uint64_t kVar,
-			    const uint64_t kPos);
+			    const uint64_t kPos) const;
     uint64_t SufLeftSelect(const uint64_t kVar,
-			   FLCVector &result);
+			   FLCVector &result) const;
     uint64_t SufRightSelect(const uint64_t kVar,
-			    FLCVector &result);
-    uint64_t Len(){
+			    FLCVector &result) const;
+    uint64_t Len() const {
       return prefix_len_ + suf_left_.Num();
     }
-    uint64_t PreLen(){
+    uint64_t PreLen() const {
       return prefix_len_;
     }
-    uint64_t LeftBPD(){
+    uint64_t LeftBPD() const {
       return suf_left_.BPH();
     }
 
-    uint64_t RightBPD(){
+    uint64_t RightBPD() const {
       return suf_right_.BPH();
     }
     void     Save     (std::ofstream &ofs);
@@ -129,7 +129,7 @@ namespace solca_comp{
     void     InitUHashTable   ();
     void     DeleteUHashTable ();
     uint64_t SearchRule       (const uint64_t kVar1,
-			       const uint64_t KVar2); 
+			       const uint64_t KVar2);
     uint64_t PreReverseAccess (const uint64_t kVar1,
 			       const uint64_t kVar2);
     uint64_t SufReverseAccess (const uint64_t kVar1,
@@ -145,7 +145,7 @@ namespace solca_comp{
 			       const uint64_t kPos); 
     void     FirstBuildPreRight ();
     uint64_t GetPos           (const uint64_t kVar,
-			       FLCVector   &result); 
+			       FLCVector   &result) const;
     void     ReBuildPrefix    ();
     void     ReBuildPreLeft   ();
     void     ReBuildPreRight  ();
@@ -156,7 +156,7 @@ namespace solca_comp{
     void     ResizeHash();
     uint64_t UpdateSuffixMaxLen();
     uint64_t PreSelectInRightPerm(const uint64_t kVar,
-				  const uint64_t kPos);
+				  const uint64_t kPos) const;
     uint64_t Space() const;
   };
 

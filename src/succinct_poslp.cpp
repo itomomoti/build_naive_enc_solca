@@ -96,7 +96,7 @@ namespace solca_comp
     return num_rules_++;
   }
 
-  uint64_t SucPOSLP::AccessLeaf(const uint64_t kInd)
+  uint64_t SucPOSLP::AccessLeaf(const uint64_t kInd) const
   {
     uint64_t kOuterRank = sfbt_.OuterRank(kInd);
     if (sfbt_.IsOuter(kInd))
@@ -118,7 +118,7 @@ namespace solca_comp
   }
 
   //operations for accessing production rules.
-  uint64_t SucPOSLP::Left(const uint64_t kVar)
+  uint64_t SucPOSLP::Left(const uint64_t kVar) const
   {
     if (kVar < kAlphabetSize)
     {
@@ -141,7 +141,7 @@ namespace solca_comp
     return SFBTVar2Var(sfbt_.InRank(kSFBTPos) - 1);
   }
 
-  uint64_t SucPOSLP::Right(const uint64_t kVar)
+  uint64_t SucPOSLP::Right(const uint64_t kVar) const
   {
     if (kVar < kAlphabetSize)
     {
@@ -164,7 +164,7 @@ namespace solca_comp
     return SFBTVar2Var(sfbt_.InRank(kSFBTPos) - 1);
   }
 
-  uint64_t SucPOSLP::ParentOfInNode(const uint64_t kVar, bool &isleft)
+  uint64_t SucPOSLP::ParentOfInNode(const uint64_t kVar, bool &isleft) const
   {
 
     if (kVar >= num_rules_ - 1 || kVar < kAlphabetSize)

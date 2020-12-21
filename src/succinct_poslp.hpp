@@ -105,10 +105,10 @@ namespace solca_comp {
     uint64_t PushOuterSFBT();
     
     //accessing POSLP's tree 
-    uint64_t Left(const uint64_t kVar);
-    uint64_t Right(const uint64_t kVar);
+    uint64_t Left(const uint64_t kVar) const;
+    uint64_t Right(const uint64_t kVar) const;
     uint64_t ParentOfInNode(const uint64_t kVar, 
-			    bool &is_left);
+			    bool &is_left) const;
 
     //reverse access and update POSLP
     Node     ReverseAccessAndUpdate(const Node   &kLeft, 
@@ -129,25 +129,25 @@ namespace solca_comp {
     void Load(std::ifstream &ifs);
   
   private:
-    uint64_t AccessLeaf(const uint64_t kInd);
+    uint64_t AccessLeaf(const uint64_t kInd) const;
     //decompression method
     void Decode(const uint64_t kVar,
 		std::ofstream &ofs2);
     // transformation of the variable of post order straight line program
     //to the variable of succinct full binary tree
     // and the reversed transformation
-    inline uint64_t Var2SFBTVar(const uint64_t kVar);
-    inline uint64_t SFBTVar2Var(const uint64_t kVar);    
+    inline uint64_t Var2SFBTVar(const uint64_t kVar) const;
+    inline uint64_t SFBTVar2Var(const uint64_t kVar) const;
   }; // class SucPOSLP
   //inline implementations
-  inline uint64_t SucPOSLP::Var2SFBTVar(const uint64_t kVar) {
+  inline uint64_t SucPOSLP::Var2SFBTVar(const uint64_t kVar) const {
     if (kVar < kAlphabetSize){
       return kDummyCode;
     }
     return kVar - kAlphabetSize;
   }
 
-  inline uint64_t SucPOSLP::SFBTVar2Var(const uint64_t kVar) {
+  inline uint64_t SucPOSLP::SFBTVar2Var(const uint64_t kVar) const {
     return kVar + kAlphabetSize;
   }
 

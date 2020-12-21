@@ -49,37 +49,37 @@ namespace solca_comp{
     void Clear();
 
     //accessors for bp
-    size_t Length();
+    size_t Length() const;
     size_t ByteSize() const;
-    bool   Get(uint64_t i);
+    bool   Get(uint64_t i) const;
 
     //set a bit c to the tail of BP
     void PushBack(const int c);
   
     // rank/seelct operations
     uint64_t Rank(uint64_t i,
-		  int c);
+		  int c) const;
     uint64_t Select(uint64_t i,
-		    int c);
-    uint64_t OuterRank(uint64_t i);
-    uint64_t OuterSelect(uint64_t i);
+		    int c) const;
+    uint64_t OuterRank(uint64_t i) const;
+    uint64_t OuterSelect(uint64_t i) const;
   
     // operations for postiorder full binary tree
-    uint64_t RightChild(uint64_t i);
-    uint64_t LeftChild(uint64_t i);
-    uint64_t Parent(uint64_t i);
-    uint64_t InSelect(uint64_t i);
-    uint64_t LeafSelect(uint64_t i);
-    uint64_t InRank(uint64_t i);
-    uint64_t LeafRank(uint64_t i);  
-    int IsRightChild(uint64_t i);
-    int IsLeftChild(uint64_t i);
-    bool IsLeaf(uint64_t i);
-    uint64_t LeftMostLeaf(uint64_t i);
-    uint64_t RightMostLeaf(uint64_t i);
-    bool IsOuter_LC(uint64_t i);
-    bool IsOuter_RC(uint64_t i);
-    bool IsOuter(uint64_t i);
+    uint64_t RightChild(uint64_t i) const;
+    uint64_t LeftChild(uint64_t i) const;
+    uint64_t Parent(uint64_t i) const;
+    uint64_t InSelect(uint64_t i) const;
+    uint64_t LeafSelect(uint64_t i) const;
+    uint64_t InRank(uint64_t i) const;
+    uint64_t LeafRank(uint64_t i) const;
+    int IsRightChild(uint64_t i) const;
+    int IsLeftChild(uint64_t i) const;
+    bool IsLeaf(uint64_t i) const;
+    uint64_t LeftMostLeaf(uint64_t i) const;
+    uint64_t RightMostLeaf(uint64_t i) const;
+    bool IsOuter_LC(uint64_t i) const;
+    bool IsOuter_RC(uint64_t i) const;
+    bool IsOuter(uint64_t i) const;
   
     //save and load
     void Save(std::ofstream &ofs);  

@@ -140,11 +140,19 @@ namespace solca_comp {
       + sizeof(SOLCA);
   }
 
-  uint64_t SOLCA::NumRules() const{
+  uint64_t SOLCA::Left(const uint64_t kVar) const{
+    return sposlp_.Left(kVar);
+  }
+
+  uint64_t SOLCA::Right(const uint64_t kVar) const{
+    return sposlp_.Right(kVar);
+  }
+
+  uint64_t SOLCA::NumRules() const {
     return sposlp_.NumRules();
   }
 
-  uint64_t SOLCA::DictNumRules() const{
+  uint64_t SOLCA::DictNumRules() const {
     return NumRules();
   }
 
@@ -245,6 +253,53 @@ namespace solca_comp {
            << endl;
     }
     sposlp_.Clear();
+    return 0;
+  }
+
+  uint64_t SOLCA::Build(const string& kInputFileName,
+                        const string& kOutputFileName,
+                        const bool    kEraseBr,
+                        const bool    kPrintLogs){
+    ifstream ifs(kInputFileName.c_str());
+    double start = GetTimeOfDaySec();
+    Init(kOutputFileName);
+
+    uint64_t cnt = 0;
+    if(kPrintLogs){
+      PrintColumns();
+    }
+    for (char c; ifs && ifs.get(c);) {
+      if (kEraseBr) {
+        if (c == '\n') continue;
+      }
+      if(kPrintLogs){
+        if (cnt % 10000000ULL == 0) {
+          PrintLogs(cnt,
+                    GetTimeOfDaySec() - start);
+        }
+      }
+      sposlp_.PushToBuffer((uint8_t)c);
+      BuildPOSLP(Node(c), 0);
+      ++cnt;
+    }
+    if(kPrintLogs){
+      PrintLogs(cnt,
+                GetTimeOfDaySec() - start);
+    }
+    ProcessLastSymbols();
+    if(kPrintLogs){
+      PrintLogs(cnt,
+                GetTimeOfDaySec() - start);
+    }
+    else{
+      cout << "compression time [sec]: "
+           << GetTimeOfDaySec() - start
+           << endl;
+      cout << "#production rules: "
+           << NumRules() - kAlphabetSize
+           << endl;
+    }
+    // sposlp_.Clear();
     return 0;
   }
 

@@ -47,7 +47,7 @@ namespace solca_comp{
     return sizeof(SucFBTree) + obp_.Size();
   }
 
-  size_t SucFBTree::Length(){
+  size_t SucFBTree::Length() const{
     return obp_.Length();
   }
 
@@ -55,12 +55,12 @@ namespace solca_comp{
     obp_.Push(c);
   }
 
-  uint64_t SucFBTree::OuterRank(uint64_t i)
+  uint64_t SucFBTree::OuterRank(uint64_t i) const
   {
     return obp_.OuterRank(i);
   }
 
-  uint64_t SucFBTree::OuterSelect(uint64_t i)
+  uint64_t SucFBTree::OuterSelect(uint64_t i) const
   {
     return obp_.OuterSelect(i);
   }
@@ -69,34 +69,34 @@ namespace solca_comp{
   //        postorder full binary tree‚É‘Î‚·‚é‘€ì
   ////////////////////////////////////////////////////////////////
 
-  uint64_t SucFBTree::RightChild(uint64_t i)
+  uint64_t SucFBTree::RightChild(uint64_t i) const
   {
     return i - 1;
   }
 
-  uint64_t SucFBTree::LeftChild(uint64_t i)
+  uint64_t SucFBTree::LeftChild(uint64_t i) const
   {
     return obp_.Bwd(i, 0);
   }
 
 
-  uint64_t SucFBTree::InSelect(uint64_t i) {
+  uint64_t SucFBTree::InSelect(uint64_t i) const {
     return obp_.Select(i, kCP);
   }
 
-  uint64_t SucFBTree::LeafSelect(uint64_t i) {
+  uint64_t SucFBTree::LeafSelect(uint64_t i) const {
     return obp_.Select(i, kOP);
   }
 
-  uint64_t SucFBTree::InRank(uint64_t i) {
+  uint64_t SucFBTree::InRank(uint64_t i) const {
     return obp_.Rank(i, kCP);
   }
 
-  uint64_t SucFBTree::LeafRank(uint64_t i) {
+  uint64_t SucFBTree::LeafRank(uint64_t i) const {
     return obp_.Rank(i, kOP);
   }
 
-  uint64_t SucFBTree::LeftMostLeaf(uint64_t i)
+  uint64_t SucFBTree::LeftMostLeaf(uint64_t i) const
   {
     if (obp_.Get(i)) {
       return i;
@@ -110,18 +110,18 @@ namespace solca_comp{
   }
 
   //??
-  uint64_t SucFBTree::RightMostLeaf(uint64_t i)
+  uint64_t SucFBTree::RightMostLeaf(uint64_t i) const
   {
     return obp_.Select(obp_.Rank(i, kOP), kOP); 
   }
 
-  bool SucFBTree::IsLeaf(uint64_t i) {
+  bool SucFBTree::IsLeaf(uint64_t i) const {
     if (obp_.Get(i) == kOP) return true;
     return false;
   }
 
   // A parent might not be fixed. It should be checked by user of this func.
-  int SucFBTree::IsRightChild(uint64_t i)
+  int SucFBTree::IsRightChild(uint64_t i) const
   {
     if (!(obp_.Get(i+1))) {
       return 1; // i is a right child.
@@ -131,7 +131,7 @@ namespace solca_comp{
   }
 
   // A parent might not be fixed. It should be checked by user of this func.
-  int SucFBTree::IsLeftChild(uint64_t i)
+  int SucFBTree::IsLeftChild(uint64_t i) const
   {
     if (!(obp_.Get(i + 1))) {
       return 0;
@@ -140,17 +140,17 @@ namespace solca_comp{
     }
   }
 
-  bool SucFBTree::IsOuter_LC(uint64_t i) {
+  bool SucFBTree::IsOuter_LC(uint64_t i) const {
     if (obp_.GetBits(i, 3) == 6) return true;
     return false;
   }
 
-  bool SucFBTree::IsOuter_RC(uint64_t i) {
+  bool SucFBTree::IsOuter_RC(uint64_t i) const {
     if (obp_.GetBits(i-1, 3) == 6) return true;
     return false;
   }
 
-  bool SucFBTree::IsOuter(uint64_t i) {
+  bool SucFBTree::IsOuter(uint64_t i) const {
     if(i == 0){
       if (obp_.GetBits(i, 3) == 6) return true;
     }
@@ -166,7 +166,7 @@ namespace solca_comp{
     obp_.Load(ifs);
   }
 
-  uint64_t SucFBTree::Parent(uint64_t i)
+  uint64_t SucFBTree::Parent(uint64_t i) const
   {
     if (i >= obp_.Length() - 1) {
       return NOT_FOUND;
@@ -177,7 +177,7 @@ namespace solca_comp{
     }
   }
 
-  bool SucFBTree::Get(uint64_t i){
+  bool SucFBTree::Get(uint64_t i) const {
     return obp_.Get(i);
   }
 

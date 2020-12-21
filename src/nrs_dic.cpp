@@ -115,7 +115,7 @@ namespace solca_comp{
   }
 
   uint64_t NRSDic::Select(const uint64_t kVar,
-			  FLCVector      &result){
+			  FLCVector      &result) const {
     uint64_t hash_val = CFunc::ComputeHashVal(hash_size_,kVar);
     uint64_t key1 = hash_table_[hash_val];
     if(key1 == 0){
@@ -140,7 +140,7 @@ namespace solca_comp{
     }
   }
 
-  uint64_t NRSDic::Access(const uint64_t kIndex){
+  uint64_t NRSDic::Access(const uint64_t kIndex) const {
     return data_[kIndex];
   }
 
@@ -219,15 +219,15 @@ namespace solca_comp{
     }
   }
 
-  uint64_t NRSDic::BPH(){
+  uint64_t NRSDic::BPH() const {
     return bits_per_hash_;
   }
 
-  uint64_t NRSDic::Num(){
+  uint64_t NRSDic::Num() const {
     return data_.NumCodes();
   }
 
-  uint64_t NRSDic::MaxVar(){
+  uint64_t NRSDic::MaxVar() const {
     return max_var_;
   }
 

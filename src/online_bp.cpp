@@ -35,7 +35,7 @@ namespace solca_comp
   // operations for bit array
 
   uint64_t OnlineBP::FwdSel(uint64_t block_pos,
-                            uint64_t i)
+                            uint64_t i) const
   {
     uint64_t ret = 0;
     uint64_t ret64;
@@ -49,7 +49,7 @@ namespace solca_comp
   }
 
   uint64_t OnlineBP::FwdSel_0(uint64_t block_pos,
-                              uint64_t i)
+                              uint64_t i) const
   {
     uint64_t ret = 0;
     uint64_t ret64;
@@ -63,7 +63,7 @@ namespace solca_comp
   }
 
   uint64_t OnlineBP::FwdSelOuter(uint64_t block_pos,
-                                 uint64_t i)
+                                 uint64_t i) const
   {
     uint64_t ret = 0;
     uint64_t ret64;
@@ -88,17 +88,17 @@ namespace solca_comp
     return size_;
   }
 
-  size_t OnlineBP::Length()
+  size_t OnlineBP::Length() const
   {
     return n_;
   }
 
-  int OnlineBP::Alpha()
+  int OnlineBP::Alpha() const
   {
     return kAlpha;
   }
 
-  int OnlineBP::L()
+  int OnlineBP::L() const
   {
     return kBlock.size;
   }
@@ -286,7 +286,7 @@ namespace solca_comp
   //        Operations for parentheses
   //////////////////////////////////////////////////////////////
   // return excess[i]
-  uint32_t OnlineBP::Depth(uint64_t i)
+  uint32_t OnlineBP::Depth(uint64_t i) const
   {
     uint32_t q = i & kBlock.lo_bits; // position in block L
     if (q == kBlock.size - 1)
@@ -299,7 +299,7 @@ namespace solca_comp
 
   // return # of occ of c in [0..i]
   uint64_t OnlineBP::Rank(uint64_t i,
-                          int c)
+                          int c) const
   {
     uint64_t d = Depth(i);
     if (c == kOP)
@@ -316,7 +316,7 @@ namespace solca_comp
   // !NOTE! Assume that the answer exists.
   // Assume that excess is in [1, 127].
   uint64_t OnlineBP::Select(uint64_t i,
-                            int c)
+                            int c) const
   {
     if (c == kOP)
     {
@@ -342,7 +342,7 @@ namespace solca_comp
     }
   }
 
-  uint64_t OnlineBP::OuterRank(uint64_t i)
+  uint64_t OnlineBP::OuterRank(uint64_t i) const
   {
     uint64_t ret = outerRankHA_[i >> kOuterH.lg];
     const uint64_t last = ((i + 1) >> kBlock.lg);
@@ -361,10 +361,10 @@ namespace solca_comp
     }
   }
 
-  uint64_t OnlineBP::OuterSelect(uint64_t i)
+  uint64_t OnlineBP::OuterSelect(uint64_t i) const
   {
     uint64_t idx = (i >> kOuterH.lg);
-    uint64_t *hblock = std::lower_bound(&outerRankHA_[outerSelHA_[idx]],
+    const uint64_t *hblock = std::lower_bound(&outerRankHA_[outerSelHA_[idx]],
                                         &outerRankHA_[outerSelHA_[idx + 1]],
                                         i);
     --hblock;
@@ -392,7 +392,7 @@ namespace solca_comp
   uint64_t OnlineBP::BwdWords(uint64_t block_pos,
                               const uint32_t end_pos,
                               const uint32_t num_words,
-                              int32_t &d)
+                              int32_t &d) const
   {
     // For the first word, we fill dummy bits (OP) to align ETW block boundary.
     // Also we change x_0[end_pos] to OP when x_[end_pos] == CP.
@@ -429,7 +429,7 @@ namespace solca_comp
   //! return the position where excess value is e[i] - d for the first time to the left of i.
   //! It returns NOT_FOUND if the answer does not exist.
   uint64_t OnlineBP::Bwd(const uint64_t i,
-                         int32_t d)
+                         int32_t d) const
   {
     uint64_t offset = BwdWords(i / kMidBlock.size,
                                i & kMidBlock.lo_bits,
@@ -515,7 +515,7 @@ namespace solca_comp
   uint64_t OnlineBP::FwdWords(uint64_t block_pos,
                               const uint32_t beg_pos,
                               const uint32_t num_words,
-                              int32_t &d)
+                              int32_t &d) const
   {
     // For the first word, we fill dummy bits (CP) to align ETW block boundary.
     // Also we change x_0[end_pos] to CP when x_[end_pos] == OP.
@@ -551,7 +551,7 @@ namespace solca_comp
 
   // WARNING: [assumption] target (== onlinebp_depth(bp, i) + d) >= 0.
   uint64_t OnlineBP::Fwd(const uint64_t i,
-                         int32_t d)
+                         int32_t d) const
   {
     uint64_t idx = (i + 1) / kMidBlock.size;
     uint64_t num_words = std::min((n_) / kMidBlock.size - idx + 1, kMidInBlock.size - (idx & kMidInBlock.lo_bits));
@@ -632,13 +632,13 @@ namespace solca_comp
                                          d);
   }
 
-  uint32_t OnlineBP::Get(uint64_t i)
+  uint32_t OnlineBP::Get(uint64_t i) const
   {
     return BP_[i];
   }
 
   uint64_t OnlineBP::GetBits(uint64_t i,
-                             uint32_t d)
+                             uint32_t d) const
   {
     return BP_.GetBits(i,
                        d);

@@ -63,17 +63,17 @@ namespace solca_comp{
     uint64_t PushBack       (const uint64_t kVar);
  
     uint64_t Select         (const uint64_t kVar,
-			     FLCVector    &result);
-    uint64_t Access         (const uint64_t kIndex);
+			     FLCVector    &result) const;
+    uint64_t Access         (const uint64_t kIndex) const;
     void     Clear          ();
     void     CheckClear     ();
     void     Delete         ();
     uint64_t ByteSize       () const;
     void     DataResize     (const uint64_t kLen);
     void     Resize         (const uint64_t kLen);
-    uint64_t BPH            ();
-    uint64_t Num            ();
-    uint64_t MaxVar         ();
+    uint64_t BPH            () const;
+    uint64_t Num            () const;
+    uint64_t MaxVar         () const;
     void     Save           (std::ofstream &ofs);
     void     Load           (std::ifstream &ifs);
   private:
