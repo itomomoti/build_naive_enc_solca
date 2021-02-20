@@ -1,3 +1,19 @@
+# build_naive_enc_solca forked from solca
+- Modified https://github.com/tkbtkysms/solca.git to give public access to const functions of solca-encoded grammar object.
+- Added an executable "build" to get a Naive encoding of SOLCA, which just outputs the grammar rules in an unsigned integer sequence.
+- Note that solca assumes byte characters each of which uses an integer in 0 ~ 255, and variables use integers starting from 256.
+```
+    $ ./build --input_file=string --output_file=string [options] ...   
+     options:  
+       -i, --input_file     input file name (string)  
+       -o, --output_file    output file name (string)  
+       -e, --erase_br       erase line break (bool [=0])  
+       -?, --help           print this message  
+```
+
+Original README of solca below
+--
+
 # solca
 This program is a space-optimal version of grammar compression called FOLCA [1].  
 The detail is showed in [A Space-Optimal Grammar Compression](http://drops.dagstuhl.de/opus/volltexte/2017/7864/) [2].  
